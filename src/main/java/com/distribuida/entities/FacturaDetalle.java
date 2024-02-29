@@ -107,7 +107,7 @@ public class FacturaDetalle {
 		this.subTotal = subTotal;
 	}
 
-	public double getDescuento1() {
+	public Double getDescuento1() {
     return descuento1; 
     }
 
@@ -115,7 +115,7 @@ public class FacturaDetalle {
 		this.descuento1 = descuento1;
 	}
 
-	public double getDescuento2() {
+	public Double getDescuento2() {
 	return descuento2; 
 	}
 

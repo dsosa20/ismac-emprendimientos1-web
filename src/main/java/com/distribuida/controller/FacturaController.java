@@ -1,8 +1,10 @@
 package com.distribuida.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,45 +21,64 @@ import com.distribuida.entities.FacturaDetalle;
 @RequestMapping("/facturas")
 public class FacturaController {
 
-	@Autowired
-	private FacturaService facturaService;
-	
-	@GetMapping("/findAll")
-	public String findAll(Model model) {
-		List<FacturaDetalle> facturadetalles = facturaService.findAll();
-		model.addAttribute("facturadetalles",facturadetalles);
-		return "facturadetalle-listar";
-		
-	}
-	
+    @Autowired
+    private FacturaService facturaService;
+
+//    @GetMapping("/findAll")
+//    public String findAll(Model model) {
+//        List<FacturaDetalle> facturadetalles = facturaService.findAll();
+//        model.addAttribute("facturadetalles", facturadetalles);
+//        return "facturadetalle-listar";
+//    }
+    
+    
+    
 	@GetMapping("/findOne")
-	public String findOne(@RequestParam("numFactura") @Nullable String numFactura
+	public String findOne(@RequestParam("idFactura") @Nullable Integer idFactura
 			, @RequestParam("opcion") @Nullable Integer opcion
 			, Model model) {
 		
-		if(numFactura != null) {
-			int factura = facturaService.findOne( numFactura);
+		if(idFactura != null) {
+			Factura factura = facturaService.findOne(idFactura);
 			model.addAttribute("factura",factura);
 		}
 		if(opcion == 1) return "factura-add";
 		else return "factura-del";
 		
 	}
-	
-//	@PostMapping("/add")
-//	public String add(@RequestParam("idFactura") @Nullable Integer idFactura
-//			, @RequestParam("numFactura") @Nullable String cedula
-//			, @RequestParam("fechaFactura") @Nullable String nombre
-//			, @RequestParam("totalNeto") @Nullable String apellido
-//			, @RequestParam("iva") @Nullable String direccion
-//			, @RequestParam("total") @Nullable String telefono
-//			, Model model
-//			) {
-//		if(idFactura == null) facturaService.add(0,numFactura, fechaFactura, totalNeto, iva, total);
-//		else facturaService.up(idFactura,,numFactura, fechaFactura, totalNeto, iva, total);
-//		
-//		return "redirect:/facturas/findAll";
-//	}
-//	
+    
+    
+    
+    @PostMapping("/addFacturas")
+    public String addFactura(@RequestParam("idFactua") @Nullable Integer idFactura 
+    						 , @RequestParam("numFactura") @Nullable String numFactura
+                             , @RequestParam("fechaFactura") @Nullable Date fechaFactura
+                             , @RequestParam("totalNeto") @Nullable Double totalNeto
+                             , @RequestParam("iva") @Nullable Double iva
+                             , @RequestParam("total") @Nullable Double total
+                             , @RequestParam("fk_idCliente") @Nullable Integer idCliente
+                             , @RequestParam("fk_idPedido") @Nullable Integer idPedido
+                             , @RequestParam("fk_idFormaPago") @Nullable Integer idFormaPago
+                             ) {
+    	if(idFactura == null) {
+        	facturaService.add(0, numFactura, fechaFactura, totalNeto, iva, total,idCliente, idPedido, idFormaPago);
+    	} else {
+        	facturaService.up(idFactura, numFactura, fechaFactura, totalNeto, iva, total,idCliente, idPedido, idFormaPago);
+    	}
+        return "redirect:/facturas/findAll";
+    }
+    
+    @GetMapping("/findAll")
+    public String findAll(@RequestParam(name = "busqueda", required = false) String busqueda, Model model) {
+        List<Factura> facturas;
+        if (busqueda != null && !busqueda.isEmpty()) {
+            facturas = facturaService.findAll(busqueda);
+        } else {
+            facturas = facturaService.findAll("");
+        }
+        model.addAttribute("facturas", facturas);
+        return "factura-listar"; 
+    }
 
+    
 }

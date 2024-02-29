@@ -48,7 +48,7 @@ public class FacturaServiceImpl implements FacturaService {
 	}
 
 	@Override
-	public void add(int idFactura, String numFactura, Date fechaFactura, double totalNeto, double iva, double total,
+	public void add(int idFactura, String numFactura, Date fechaFactura, Double totalNeto, Double iva, Double total,
 			int idCliente, int idPedido, int idFormaPago) {
 		// TODO Auto-generated method stub
 		Factura factura = new Factura(idFactura, numFactura,  fechaFactura,  totalNeto, iva, total);
@@ -65,7 +65,7 @@ public class FacturaServiceImpl implements FacturaService {
 	}
 	@Override
 	public void add(int idFacturaDetalle, String producto, int cantidad, double preUnidad, double subTotal,
-			double descuento1, double descuento2, int idFactura, int idEmpresaFactura) {
+			Double descuento1, Double descuento2, int idFactura, int idEmpresaFactura) {
 		// TODO Auto-generated method stub
 		FacturaDetalle facturaDetalle = new FacturaDetalle(idFacturaDetalle, producto, cantidad, preUnidad, subTotal,
 				descuento1, descuento2);
@@ -97,5 +97,33 @@ public class FacturaServiceImpl implements FacturaService {
 		// TODO Auto-generated method stub
 		return facturaDAO.findAll(busqueda);
 	}
+
+	@Override
+	public void del(int id) {
+		// TODO Auto-generated method stub
+		facturaDAO.del(id);
+	}
+
+	@Override
+	public void up(int idFactura, String numFactura, Date fechaFactura, Double totalNeto, Double iva, Double total,
+			int idCliente, int idPedido, int idFormaPago) {
+		// TODO Auto-generated method stub
+		Cliente cliente = clienteDAO.findOne(idCliente);
+        Pedido pedido = pedidoDAO.findOne(idPedido);
+        FormaPago formaPago = formapagoDAO.findOne(idFormaPago);
+        
+        Factura factura = facturaDAO.findOne(idFactura);
+        
+        factura.setNumFactura(numFactura);
+        factura.setFechaFactura(fechaFactura);
+        factura.setTotalNeto(totalNeto);
+        factura.setIva(iva);
+        factura.setTotal(total);
+        factura.setCliente(cliente);
+        factura.setPedido(pedido);
+        factura.setFormaPago(formaPago);
+        
+        facturaDAO.up(factura);
+    }
 
 }

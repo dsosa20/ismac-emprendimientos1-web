@@ -1,6 +1,7 @@
 package com.distribuida.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -28,11 +30,11 @@ public class Factura {
 	@Column(name = "Fechafactura")
 	private Date fechaFactura;
 	@Column(name = "totalNeto")
-	private double totalNeto;
+	private Double totalNeto;
 	@Column(name = "Iva")
-	private double iva;
+	private Double iva;
 	@Column(name = "total")
-	private double total;
+	private Double total;
 	
 	public Factura() {}
 	
@@ -49,7 +51,7 @@ public class Factura {
 	private FormaPago formaPago;
 	
 	
-	public Factura(int idFactura, String numFactura, Date fechaFactura, double totalNeto, double iva, double total) {
+	public Factura(int idFactura, String numFactura, Date fechaFactura, Double totalNeto, Double iva, Double total) {
 		this.idFactura = idFactura;
 		this.numFactura = numFactura;
 		this.fechaFactura = fechaFactura;
@@ -95,27 +97,27 @@ public class Factura {
 		this.fechaFactura = fechaFactura;
 	}
 
-	public double getTotalNeto() {
+	public Double getTotalNeto() {
 		return totalNeto;
 	}
 
-	public void setTotalNeto(double totalNeto) {
+	public void setTotalNeto(Double totalNeto) {
 		this.totalNeto = totalNeto;
 	}
 
-	public double getIva() {
+	public Double getIva() {
 		return iva;
 	}
 
-	public void setIva(double iva) {
+	public void setIva(Double iva) {
 		this.iva = iva;
 	}
 
-	public double getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void setTotal(double total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 

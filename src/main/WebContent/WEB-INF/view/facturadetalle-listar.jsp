@@ -1,64 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"  
-         pageEncoding="ISO-8859-1"%>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
-<meta charset="ISO-8859-1">
-
-<title>Detalle Facturas</title>
-
+<meta charset="UTF-8">
+<title>Listado de Detalles de Factura</title>
 </head>
-
 <body>
-
-<h1>Detalle Facturas</h1>
-
-<table>
-
-<thead>
-
-<tr>
-  <th>idDetalleFactura</th>
-  <th>Producto</th>
-  <th>Cantidad</th>
-  <th>PrecioUnidad</th>
-  <th>SubTotal</th>
-  <th>Descuento1</th>
-  <th>Descuento2</th>
-  <th>Factura</th>   
-  <th>EmpresaProducto</th>
-  <th>Acciones</th>  
-</tr>
-</thead>
-
-<tbody>
-
-<c:forEach var="item" items="${facturas}">
-
-<tr>
-  <td>${item.idFacturaDetalle}</td>
-  <td>${item.producto}</td>
-  <td>${item.cantidad}</td>
-  <td>${item.preUnidad}</td>
-  <td>${item.subTotal}</td>
-  <td>${item.descuento1}</td>
-  <td>${item.descuento2}</td>
-  <td>${item.factura.id}</td>
-  <td>${item.empresaProducto.id}</td> 
-</tr>
-
-</c:forEach>
-
-</tbody>
-
-</table>
-
+    <h2>Listado de Detalles de Factura</h2>
+    <button><a href="${pageContext.request.contextPath}/facturas/findOne?opcion=1">Agregar</a></button>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+                <th>Descuento 1</th>
+                <th>Descuento 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${facturadetalles}" var="detalle">
+                <tr>
+                    <td>${detalle.idFacturaDetalle}</td>
+                    <td>${detalle.producto}</td>
+                    <td>${detalle.cantidad}</td>
+                    <td>${detalle.preUnidad}</td>
+                    <td>${detalle.subTotal}</td>
+                    <td>${detalle.descuento1}</td>
+                    <td>${detalle.descuento2}</td>
+          <td>
+              <button><a href="${pageContext.request.contextPath}/facturas/findOne?idFactura${item.idFactura}&opcion=1">Actualizar</a></button>
+              <button><a href="${pageContext.request.contextPath}/facturas/findOne?idFactura=${item.idFacturae}&opcion=2">Eliminar</button>
+          </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 </body>
-
 </html>

@@ -26,9 +26,9 @@ public class FacturaDetalle {
 	@Column(name = "Cantidad")
 	private int cantidad;
 	@Column(name = "preciounidad")
-	private double preUnidad;
+	private Double preUnidad;
 	@Column(name = "subtotal")
-	private double subTotal;
+	private Double subTotal;
 	@Column(name = "descuento1")
 	private Double descuento1;
 	@Column(name = "descuento2")
@@ -46,7 +46,7 @@ public class FacturaDetalle {
 	
 
 
-	public FacturaDetalle(int idFacturaDetalle, String producto, int cantidad, double preUnidad, double subTotal,
+	public FacturaDetalle(int idFacturaDetalle, String producto, int cantidad, Double preUnidad, Double subTotal,
 			Double descuento1, Double descuento2) {
 		this.idFacturaDetalle = idFacturaDetalle;
 		this.producto = producto;
@@ -91,19 +91,19 @@ public class FacturaDetalle {
 		this.cantidad = cantidad;
 	}
 
-	public double getPreUnidad() {
+	public Double getPreUnidad() {
 		return preUnidad;
 	}
 
-	public void setPreUnidad(double preUnidad) {
+	public void setPreUnidad(Double preUnidad) {
 		this.preUnidad = preUnidad;
 	}
 
-	public double getSubTotal() {
+	public Double getSubTotal() {
 		return subTotal;
 	}
 
-	public void setSubTotal(double subTotal) {
+	public void setSubTotal(Double subTotal) {
 		this.subTotal = subTotal;
 	}
 

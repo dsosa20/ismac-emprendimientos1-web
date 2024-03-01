@@ -63,15 +63,16 @@ public class FacturaServiceImpl implements FacturaService {
 		
 		facturaDAO.add(factura);
 	}
+	
 	@Override
-	public void add(int idFacturaDetalle, String producto, int cantidad, double preUnidad, double subTotal,
-			Double descuento1, Double descuento2, int idFactura, int idEmpresaFactura) {
+	public void add(int idFacturaDetalle, String producto, int cantidad, Double preUnidad, Double subTotal,
+			Double descuento1, Double descuento2, int idFactura, int idEmpresaProducto) {
 		// TODO Auto-generated method stub
 		FacturaDetalle facturaDetalle = new FacturaDetalle(idFacturaDetalle, producto, cantidad, preUnidad, subTotal,
 				descuento1, descuento2);
 		
 		Factura factura = facturaDAO.findOne(idFactura);
-		Empresa_producto empresaproducto = empresa_productoDAO.findOne(idEmpresaFactura);
+		Empresa_producto empresaproducto = empresa_productoDAO.findOne(idEmpresaProducto);
 		
 		facturaDetalle.setFactura(factura);
 		facturaDetalle.setEmpresaProducto(empresaproducto);		
@@ -102,6 +103,8 @@ public class FacturaServiceImpl implements FacturaService {
 	public void del(int id) {
 		// TODO Auto-generated method stub
 		facturaDAO.del(id);
+		
+		facturaDetalleDAO.del(id);
 	}
 
 	@Override
@@ -112,18 +115,29 @@ public class FacturaServiceImpl implements FacturaService {
         Pedido pedido = pedidoDAO.findOne(idPedido);
         FormaPago formaPago = formapagoDAO.findOne(idFormaPago);
         
-        Factura factura = facturaDAO.findOne(idFactura);
+        Factura factura = new Factura(idFactura, numFactura, fechaFactura, totalNeto, iva, total);
         
-        factura.setNumFactura(numFactura);
-        factura.setFechaFactura(fechaFactura);
-        factura.setTotalNeto(totalNeto);
-        factura.setIva(iva);
-        factura.setTotal(total);
         factura.setCliente(cliente);
         factura.setPedido(pedido);
         factura.setFormaPago(formaPago);
         
         facturaDAO.up(factura);
     }
+
+	@Override
+	public void up(int idFacturaDetalle, String producto, int cantidad, Double preUnidad, Double subTotal,
+			Double descuento1, Double descuento2, int idFactura, int idEmpresaProducto) {
+		// TODO Auto-generated method stub
+		Factura factura = facturaDAO.findOne(idFactura);
+		Empresa_producto empresaproducto = empresa_productoDAO.findOne(idEmpresaProducto);
+        
+		FacturaDetalle facturaDetalle = new FacturaDetalle(idFacturaDetalle, producto, cantidad, preUnidad, subTotal,
+				descuento1, descuento2);
+		
+	            facturaDetalle.setFactura(factura);
+	            facturaDetalle.setEmpresaProducto(empresaproducto);
+	
+	            facturaDetalleDAO.up(facturaDetalle);
+	}
 
 }

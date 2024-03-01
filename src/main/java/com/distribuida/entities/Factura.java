@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,6 +29,7 @@ public class Factura {
 	@Column(name = "NumeroFactura")
 	private String numFactura;
 	@Column(name = "Fechafactura")
+	 @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaFactura;
 	@Column(name = "totalNeto")
 	private Double totalNeto;

@@ -62,9 +62,9 @@ public class FacturaController {
         modelMap.addAttribute("formasPago", formasPago);
 
         if (opcion != null && opcion == 1) {
-            return "factura-add"; 
+            return "facturas-add"; 
         } else {
-            return "factura-del"; 
+            return "facturas-del"; 
         }
     }
     

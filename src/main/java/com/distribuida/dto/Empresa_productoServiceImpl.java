@@ -29,7 +29,7 @@ public class Empresa_productoServiceImpl implements Empresa_productoService {
 	private ProductoDAO productoDAO;
 
 	@Override
-	public List<Empresa_producto> finAll() {
+	public List<Empresa_producto> findAll() {
 		// TODO Auto-generated method stub
 		return empresa_productoDAO.findAll();
 	}

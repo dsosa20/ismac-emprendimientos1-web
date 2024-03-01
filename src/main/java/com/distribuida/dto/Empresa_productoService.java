@@ -10,7 +10,7 @@ import com.distribuida.entities.Empresa_producto;
 
 public interface Empresa_productoService {
 	
-	public List<Empresa_producto> finAll();
+	public List<Empresa_producto> findAll();
 	
 	public Empresa_producto finOne(int id);
 	

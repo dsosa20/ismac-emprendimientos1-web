@@ -103,8 +103,6 @@ public class FacturaServiceImpl implements FacturaService {
 	public void del(int id) {
 		// TODO Auto-generated method stub
 		facturaDAO.del(id);
-		
-		facturaDetalleDAO.del(id);
 	}
 
 	@Override
@@ -139,5 +137,13 @@ public class FacturaServiceImpl implements FacturaService {
 	
 	            facturaDetalleDAO.up(facturaDetalle);
 	}
+
+	@Override
+	public FacturaDetalle findDetalleOne(int id) {
+		// TODO Auto-generated method stub
+		return facturaDetalleDAO.findOne(id);
+	}
+
+
 
 }

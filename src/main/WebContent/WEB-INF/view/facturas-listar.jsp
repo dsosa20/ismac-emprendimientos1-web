@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+S<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,7 @@
             <tr>			
                 <td>${factura.idFactura}</td>
                 <td>${factura.numFactura}</td>
-                <td>${factura.fechaFactura}</td>
+                <td>${fn:substring(factura.fechaFactura,0,10)}</td>
                 <td>${factura.totalNeto}</td>
                 <td>${factura.iva}</td>
                 <td>${factura.total}</td>

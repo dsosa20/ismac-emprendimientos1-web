@@ -29,4 +29,6 @@ public interface FacturaService {
 	public FacturaDetalle findDetalleOne(int id);
 	public void up(int idFacturaDetalle, String producto, int cantidad, Double preUnidad, Double subTotal,
 			Double descuento1, Double descuento2, int idFactura, int idEmpresaProducto);
+	
+	public void deldetalles(int id);
 }

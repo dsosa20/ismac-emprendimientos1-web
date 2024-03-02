@@ -144,6 +144,12 @@ public class FacturaServiceImpl implements FacturaService {
 		return facturaDetalleDAO.findOne(id);
 	}
 
+	@Override
+	public void deldetalles(int id) {
+		// TODO Auto-generated method stub
+		facturaDetalleDAO.del(id);
+	}
+
 
 
 }

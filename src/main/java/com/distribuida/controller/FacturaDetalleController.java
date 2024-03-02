@@ -76,10 +76,11 @@ public class FacturaDetalleController {
 	    }
 	    
 	    @GetMapping("/del")
-	    public String del(@RequestParam("idFacturaDetalle") @Nullable Integer idFacturaDetalle) {
-	        facturaService.del(idFacturaDetalle);
-	        return "redirect:/facturadetalles/findAll"; 
+	    public String del(@RequestParam("id") @Nullable Integer id) {
+	        if (id != null) {
+	            facturaService.deldetalles(id);
+	        }
+	        return "redirect:/facturadetalles/findAll";
 	    }
-
 
 }
